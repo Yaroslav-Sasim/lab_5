@@ -31,13 +31,14 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                 content: contentController.text,
                 lastEdited: DateTime.now().toString(),
                 color: Color.fromRGBO(
-                  200 + random.nextInt(56), // Красный (200-255)
-                  200 + random.nextInt(56), // Зеленый (200-255)
-                  200 + random.nextInt(56), // Синий (200-255)
-                  1.0, // Прозрачность (0.0-1.0)
+                  200 + random.nextInt(56),
+                  200 + random.nextInt(56),
+                  200 + random.nextInt(56),
+                  1.0,
                 ),
               );
               widget.onSave(newNote);
+              Navigator.pop(context);
             },
           ),
         ],

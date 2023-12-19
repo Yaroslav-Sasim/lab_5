@@ -102,7 +102,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/': (context) => NotesListScreen(
           notes: notes,
-          onDelete: deleteNote,
+          onDelete: deleteNote, updateExistingNote: (int , Note ) {  },
         ),
         '/note_detail': (context) {
           final Map<String, dynamic>? args =

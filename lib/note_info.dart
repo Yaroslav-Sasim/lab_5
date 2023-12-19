@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'custom.dart';
 
 class NoteDetailScreen extends StatefulWidget {

@@ -4,8 +4,13 @@ import 'custom.dart';
 class NotesListScreen extends StatefulWidget {
   final List<Note> notes;
   final Function(int) onDelete;
+  final Function(int, Note) updateExistingNote;
 
-  NotesListScreen({required this.notes, required this.onDelete});
+  NotesListScreen({
+    required this.notes,
+    required this.onDelete,
+    required this.updateExistingNote,
+  });
 
   @override
   _NotesListScreenState createState() => _NotesListScreenState();
@@ -45,7 +50,16 @@ class _NotesListScreenState extends State<NotesListScreen> {
             margin: EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, '/note_detail', arguments: index);
+                Navigator.pushNamed(
+                  context,
+                  '/note_detail',
+                  arguments: {
+                    'index': index,
+                    'onSave': (updatedNote) {
+                      widget.updateExistingNote(index, updatedNote);
+                    },
+                  },
+                );
               },
               onLongPress: () {
                 _showDeleteDialog(context, index);
@@ -111,11 +125,9 @@ class _NotesListScreenState extends State<NotesListScreen> {
             TextButton(
               onPressed: () {
                 Navigator.of(dialogContext).pop();
-                // Удаление заметки из списка
                 setState(() {
                   widget.notes.removeAt(index);
                 });
-                // Вызов onDelete, чтобы также удалить заметку из хранилища
                 widget.onDelete(index);
               },
               child: Text("Удалить"),
