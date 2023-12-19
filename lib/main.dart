@@ -105,18 +105,16 @@ class _MyAppState extends State<MyApp> {
           onDelete: deleteNote,
         ),
         '/note_detail': (context) {
-          final noteIndex = ModalRoute.of(context)!.settings.arguments as int;
+          final Map<String, dynamic>? args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
           return NoteDetailScreen(
-            note: notes[noteIndex],
-            onSave: (updatedNote) {
-              updateExistingNote(noteIndex, updatedNote);
-            },
+            note: notes[args!['index']],
+            onSave: args['onSave'],
           );
         },
         '/create_note': (context) => CreateNoteScreen(
           onSave: (newNote) {
             addNewNote(newNote);
-            Navigator.pop(context);
           },
         ),
       },
